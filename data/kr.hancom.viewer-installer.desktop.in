@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Hancom Viewer Installer
+Exec=hancom-viewer-installer
+Icon=hancom-viewer-installer
+Terminal=false
+Type=Application
+Categories=GTK;
+NoDisplay=true;
+StartupNotify=true

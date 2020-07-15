@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=0.1
+Name=Hancom Viewer Installer
+Comment=Hancom 2020 viewer installation tool
+Icon=hancom-viewer-installer
+Encoding=UTF-8
+Exec=hancom-viewer-installer 
+Terminal=false
+Type=Application
+Categories=Utility;
+NoDisplay=true;
+StartupNotify=true

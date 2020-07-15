@@ -1,0 +1,40 @@
+hancom-viewer-installer (0.1.6+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [a62976e4] Modified the checksum of SHA56 and MD5
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 13 Jul 2020 15:06:37 +0900
+
+hancom-viewer-installer (0.1.5+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [b53fa674] Fixed error when calling GUI in thread
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 09 Jul 2020 18:40:40 +0900
+
+hancom-viewer-installer (0.1.4+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [135b0f3e] Fixed thread error
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 09 Jul 2020 09:27:47 +0900
+
+hancom-viewer-installer (0.1.3+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [ae615a69] Removed window activation check feature
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 08 Jul 2020 20:35:18 +0900
+
+hancom-viewer-installer (0.1.2+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [40c3baed] Removed dependency and modify copyright
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 07 Jul 2020 20:16:39 +0900
+
+hancom-viewer-installer (0.1.1+han2u1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 07 Jul 2020 18:40:32 +0900

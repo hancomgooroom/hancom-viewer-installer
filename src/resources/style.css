@@ -1,0 +1,71 @@
+/*Gooroom Style*/
+.installer_label {
+    font-family: NotoSansCJKkr;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: #000100;
+}
+
+.installer_button {
+    border-radius: 5px;
+	color:#ffffff;
+    background-color: #4a73d6;
+}
+
+.installer_button:hover {
+	color:#ffffff;
+    background-color: #3986e1;
+}
+
+.installer_button:disabled {
+	color:#ffffff;
+    background-color: #9b9b9b;
+}
+
+.installer_button_label {
+    font-family: NotoSansCJKkr;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: #ffffff;
+}
+
+.installer_checkbox {
+    font-family: NotoSansCJKkr;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: #000000;
+}
+
+.default_button:hover {
+    background-color: rgba(201,201,201,0.6);
+}
+
+.default_button:checked {
+    background-color: rgba(201,201,201,0.6);
+}
+
+.default_button_label {
+    font-family: NotoSansCJKkr;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    color: #000000;
+}
+
+.default_button_label:checked {
+    color : #000000;
+}
+
+.installer_progress {
+	border-radius: 3px;
+	color: #4a4a4a;
+	background-color: #e5e5e5;
+}
+
+.installer_progress progress {
+	background-color: #4a4a4a;
+}
+

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="viewer-installer">
+  <schema id="kr.hancom.viewer-installer" path="/kr/hancom/viewer-installer/">
+  </schema>
+</schemalist>
