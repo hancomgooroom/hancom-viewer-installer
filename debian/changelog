@@ -1,3 +1,10 @@
+hancom-viewer-installer (0.2.1+han2u1) unstable; urgency=medium
+
+  [ donghun ]
+  * [208cc511] Add Hancom-Toolkit installation feature
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 07 Oct 2020 14:18:06 +0900
+
 hancom-viewer-installer (0.1.6+han2u1) unstable; urgency=medium
 
   [ donghun ]

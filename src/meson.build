@@ -14,6 +14,10 @@ viewer_installer_deps = [
   dependency('libcurl')
 ]
 
+cflags = [
+  '-DUSE_HANCOM_TOOLKIT',
+]
+
 gnome = import('gnome')
 
 resources = gnome.compile_resources(
@@ -29,6 +33,7 @@ viewer_installer_sources += resources[0]
 
 executable('hancom-viewer-installer', viewer_installer_sources,
   dependencies: viewer_installer_deps,
+  c_args: cflags,
   install: true,
 )
 

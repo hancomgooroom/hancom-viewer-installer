@@ -17,14 +17,20 @@
  */
 
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <gdk/gdkx.h>
 
+#include "define.h"
+#include "utils.h"
 #include "viewer-installer-config.h"
 #include "viewer-installer-window.h"
 #include "viewer-installer-application.h"
 
 struct _ViewerInstallerApplicationPrivate
 {
+    gchar          *msg;
+    GtkWidget      *dialog;
+
     GtkWindow      *window;
     GtkCssProvider *provider;
 };
@@ -40,10 +46,67 @@ viewer_installer_application_startup (GApplication *app)
 static void
 viewer_installer_application_activate (GApplication *app)
 {
-    GFile *file;
     ViewerInstallerApplicationPrivate *priv;
     priv = viewer_installer_application_get_instance_private (VIEWER_INSTALLER_APPLICATION(app));
 
+#ifdef USE_HANCOM_TOOLKIT
+    GNetworkMonitor *monitor = g_network_monitor_get_default();
+    gboolean is_connected = g_network_monitor_get_network_available (monitor);
+
+    g_usleep (G_USEC_PER_SEC * 2);
+
+    if (!is_connected)
+    {
+        priv->msg = g_strdup (_("Network is not active"));
+        priv->dialog = gtk_message_dialog_new  (NULL,
+                                          GTK_DIALOG_MODAL,
+                                          GTK_MESSAGE_ERROR,
+                                          GTK_BUTTONS_OK,
+                                          NULL);
+        gtk_window_set_title (GTK_WINDOW (priv->dialog), _("HancomToolkit"));
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (priv->dialog), "%s", priv->msg);
+        gtk_window_set_keep_above (GTK_WINDOW (priv->dialog), TRUE);
+
+        gtk_dialog_run (GTK_DIALOG (priv->dialog));
+
+        g_application_quit (G_APPLICATION (app));
+        return;
+    }
+
+    gchar **args;
+    g_autofree gchar *command;
+
+    command = g_strdup_printf ("pkexec %s/%s/%s %s", LIBDIR, GETTEXT_PACKAGE, VIEWER_SCRIPT, TOOLKIT_NAME);
+
+    args = g_strsplit (command, " ", -1);
+
+    g_spawn_sync (NULL, args, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL, NULL, NULL);
+
+    g_strfreev (args);
+
+    g_spawn_sync (NULL, args, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL, NULL, NULL);
+
+    if (!check_package (TOOLKIT_NAME))
+    {
+        priv->msg = g_strdup (_("Package is not installed properly.\nRestart is required."));
+        priv->dialog = gtk_message_dialog_new  (NULL,
+                                          GTK_DIALOG_MODAL,
+                                          GTK_MESSAGE_ERROR,
+                                          GTK_BUTTONS_OK,
+                                          NULL);
+        gtk_window_set_title (GTK_WINDOW (priv->dialog), _("HancomToolkit"));
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (priv->dialog), "%s", priv->msg);
+        gtk_window_set_keep_above (GTK_WINDOW (priv->dialog), TRUE);
+
+        gtk_dialog_run (GTK_DIALOG (priv->dialog));
+
+        g_application_quit (G_APPLICATION (app));
+        return;
+    }
+
+    g_spawn_command_line_sync (TOOLKIT_NAME, NULL, NULL, NULL, NULL);
+#else
+    GFile *file;
     /* Get the current window or create one if necessary. */
     priv->window = gtk_application_get_active_window (GTK_APPLICATION(app));
     if (priv->window == NULL)
@@ -64,27 +127,38 @@ viewer_installer_application_activate (GApplication *app)
                                                GTK_STYLE_PROVIDER (priv->provider),
                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
     g_object_unref (file);
+#endif
 }
 
 static void
 viewer_installer_application_dispose (GObject *object)
 {
-
     ViewerInstallerApplication *app = VIEWER_INSTALLER_APPLICATION(object);
     ViewerInstallerApplicationPrivate *priv = app->priv;
+
+    if (priv && priv->dialog != NULL)
+    {
+        gtk_widget_destroy (priv->dialog);
+        priv->dialog = NULL;
+    }
+
+    if (priv && priv->msg != NULL)
+    {
+        g_free (priv->msg);
+    }
 
     if (priv && priv->window != NULL)
     {
         gtk_widget_destroy (GTK_WIDGET(priv->window));
         priv->window = NULL;
     }
-#if 1  
+
     if (priv && priv->provider != NULL)
     {
         g_clear_object (&priv->provider);
         priv->provider = NULL;
     }
-#endif
+
     G_OBJECT_CLASS (viewer_installer_application_parent_class)->dispose (object);
 }
 
@@ -100,6 +174,9 @@ viewer_installer_application_init (ViewerInstallerApplication *application)
     ViewerInstallerApplicationPrivate *priv;
     priv = viewer_installer_application_get_instance_private (application);
     priv->window = NULL;
+    priv->provider = NULL;
+    priv->dialog = NULL;
+    priv->msg = NULL;
 }
 
 static void
