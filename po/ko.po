@@ -62,3 +62,9 @@ msgstr "한글 2020 Viewer Beta 업데이트"
 
 msgid "File is not valid"
 msgstr "파일이 유효하지 않습니다"
+
+msgid "Package is not installed properly.\nRestart is required."
+msgstr "패키지가 제대로 설치되지 않았습니다.\n재시작이 필요합니다."
+
+msgid "HancomToolkit"
+msgstr "한컴 설치 도구"

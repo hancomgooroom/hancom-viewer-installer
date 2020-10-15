@@ -10,8 +10,10 @@ typedef enum
   N_STATUS
 } InstallStatus;
 
+#define TOOLKIT_NAME "hancom-toolkit"
+
 #define VIEWER_NAME "hoffice-hwpviewer"
 #define VIEWER_CHECK "hancom-viewer-check"
 #define VIEWER_SCRIPT "hancom-viewer-install"
-#define VIEWER_REFERER  "https://www.sample.com"
-#define VIEWER_INSTALL_URL "https://cdn.sample.com"
+#define VIEWER_REFERER  "https://www.sample.com/cs_center"
+#define VIEWER_INSTALL_URL "https://cdn.sample.com/pds/hnc/VIE"

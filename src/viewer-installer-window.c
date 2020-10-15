@@ -56,36 +56,6 @@ typedef struct
 
 G_DEFINE_TYPE_WITH_PRIVATE (ViewerInstallerWindow, viewer_installer_window, GTK_TYPE_APPLICATION_WINDOW)
 
-#if 0
-static void
-viewer_installer_window_check_package (ViewerInstallerWindow *win)
-{
-    gchar* msg;
-    gchar *package;
-    gchar* filename;
-
-    ViewerInstallerWindowPrivate *priv = viewer_installer_window_get_instance_private (win);
-
-    package = viewer_installer_window_view_model_get_package (priv->view_model);
-    if (check_package (package))
-    {
-        filename = viewer_installer_window_view_model_get_file_name (priv->view_model);
-        if (check_version (package, filename))
-        {
-            msg = g_strdup (_("Update to the hancom 2020 Viewer Beta"));
-            gtk_label_set_text (priv->update_label, msg);
-            gtk_widget_show (GTK_WIDGET (priv->update_label));
-        }
-        else
-        {
-            msg = g_strdup (_("Hangul 2020 Viewer Beta is installed"));
-            gtk_label_set_text (priv->error_label, msg);
-            gtk_stack_set_visible_child (GTK_STACK (priv->bar_stack), priv->end_bar);
-        }
-    }
-}
-#endif
-
 static void viewer_installer_window_button_close_clicked (GtkWidget *button, ViewerInstallerWindow *win)
 {
     gtk_widget_destroy (GTK_WIDGET (win));

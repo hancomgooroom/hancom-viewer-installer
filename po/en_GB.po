@@ -62,3 +62,9 @@ msgstr "Update to Hangul 2020 Viewer Beta"
 
 msgid "File is not valid"
 msgstr "File is not valid"
+
+msgid "Package is not installed properly.\nRestart is required."
+msgstr "Package is not installed properly.\nRestart is required."
+
+msgid "HancomToolkit"
+msgstr "HancomToolkit"

@@ -16,6 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
 #include "define.h"
@@ -45,11 +46,17 @@ main (int   argc,
         return 0;
     }
 
+#ifdef USE_HANCOM_TOOLKIT
+    if (check_package (TOOLKIT_NAME))
+    {
+        return 0;
+    }
+#else
     if (check_package (VIEWER_NAME))
     {
         return 0;
     }
-
+#endif
     g_autoptr(GtkApplication) app = NULL;
 
     /* Set up gettext translations */
